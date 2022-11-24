@@ -6,6 +6,7 @@ import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 const Signup = () => {
 
     const [error, setError] = useState('')
+    const [userRole, setUserRole] = useState('');
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const handelSubmit = (event) => {
@@ -16,7 +17,7 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, email, password)
+        console.log(userRole, name, email, password)
 
         createUser(email, password)
             .then(result => {
@@ -52,31 +53,27 @@ const Signup = () => {
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handelSubmit} className="card-body">
                         <h1 className=" mx-12 text-4xl mb-3 font-bold">Signup now</h1>
-
                         <span className="label-text text-center text-lg">Select your account type</span>
                         <div className='flex items-center justify-evenly'>
                             <div className='flex items-center'>
-                                <input type="radio" name="radio-1" className="radio" />
-                                <span className="label-text ml-2">Buyer</span></div>
+                                <input type="radio" name="userRole" value="buyer" className="radio mr-2" onChange={e => setUserRole(e.target.value)} required /> Buyer
+                            </div>
                             <div className='flex items-center'>
-
-                                <input type="radio" name="radio-1" className="radio" />
-                                <span className="label-text ml-2">Seller</span> </div>
+                                <input type="radio" name="userRole" value="seller" className="radio mr-2" onChange={e => setUserRole(e.target.value)} required /> Seller
+                            </div>
                         </div>
-
-
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Your Name</span>
                             </label>
                             <input type="text" placeholder="your name" name='name' className="input input-bordered" required />
                         </div>
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Chose Your Photo</span>
                             </label>
-                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" required/>
-                        </div>
+                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" required />
+                        </div> */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>

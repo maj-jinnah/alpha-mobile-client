@@ -7,7 +7,8 @@ import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 const Login = () => {
 
     const { googleProviderSignIn, signInUser } = useContext(AuthContext)
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+    const [userRole, setUserRole] = useState('');
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -37,6 +38,7 @@ const Login = () => {
             .then((result) => {
                 const user = result.user
                 console.log(user)
+                setUserRole('buyer')
                 // navigate(from, { replace: true })
             })
             .catch((error) => {
