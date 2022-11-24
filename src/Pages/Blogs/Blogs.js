@@ -2,7 +2,7 @@ import React from 'react';
 
 const Blogs = () => {
     return (
-        <div className='w-2/3 mx-auto'>
+        <div className='w-11/12 md:w-4/5  lg:w-2/3 mx-auto'>
             <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-5">
                 <div className="collapse-title text-xl font-medium">
                     What are the different ways to manage a state in a React application?
@@ -19,26 +19,43 @@ const Blogs = () => {
             </div>
             <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-5">
                 <div className="collapse-title text-xl font-medium">
-                    Focus me to see content
+                    How does prototypical inheritance work?
                 </div>
                 <div className="collapse-content">
-                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                    <p>Every object with its methods and properties contains an internal and hidden property known as [[Prototype]]. The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. Traditionally, in order to get and set the [[Prototype]] of an object, we use Object.getPrototypeOf and Object.setPrototypeOf. Nowadays, in modern language, it is being set using __proto__.</p>
                 </div>
             </div>
             <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-5">
                 <div className="collapse-title text-xl font-medium">
-                    Focus me to see content
+                    What is a unit test? Why should we write unit tests?
                 </div>
                 <div className="collapse-content">
-                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                    <p>Unit testing is a type of software testing where individual units or software components are tested. Its purpose is to validate that each unit of code performs as expected. A unit can be anything you want it to be a line of code, a method, or a class. <br />
+                        To justify any effort in business, there must be a positive impact on the bottom line. Here are a few benefits of writing unit tests: <br />
+                        {
+                            <div>
+                                <li>You can test units or functions of your project in isolation.</li>
+                                <li>Unit tests act as documentation for your code.</li>
+                                <li>They enable you to catch bugs early in the development process.</li>
+                                <li>Automated unit tests help a great deal with regression testing.</li>
+                                <li>They detect code smells in your codebase. For example, if you're having a hard time writing unit   tests for  a piece of code, it might be a sign that your function is too complex.</li>
+                                <li>They contribute to higher code quality.</li>
+                            </div>
+                        }
+                    </p>
                 </div>
             </div>
             <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-5">
                 <div className="collapse-title text-xl font-medium">
-                    Focus me to see content
+                    React vs. Angular vs. Vue?
                 </div>
                 <div className="collapse-content">
-                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                    <p>
+                        <strong className='text-lg'>React-</strong> React, developed by Facebook, was initially released in 2013. React, interestingly, combines the UI and behavior of components. React offers a Getting Started guide that should help one set up React in about an hour. The documentation is thorough and complete, with solutions to common issues already present on Stack Overflow. React is not a complete framework and advanced features require the use of third-party libraries. This makes the learning curve of the core framework not so steep but depends on the path you take with additional functionality. <br /> <br />
+
+                        <strong className='text-lg'>Angular-</strong> Angular, developed by Google, was first released in 2010, making it the oldest of the lot. It is a TypeScript-based JavaScript framework. In Angular, components are referred to as directives. Directives are just markers on DOM elements, which Angular can track and attach specific behavior too. Therefore, Angular separates the UI part of components as attributes of HTML tags, and their behaviors in the form of JavaScript code. <br /> <br />
+
+                        <strong className='text-lg'>Vue-</strong> Vue, also known as Vue.js, is the youngest member of the group. It was developed by ex-Google employee Evan You in 2014.  In Vue, UI and behavior are also a part of components, which makes things more intuitive. Also, Vue is highly customizable, which allows you to combine the UI and behavior of components from within a script. However, simplicity and flexibility of Vue is a double-edged sword — it allows poor code, making it difficult to debug and test.</p>
                 </div>
             </div>
         </div>
