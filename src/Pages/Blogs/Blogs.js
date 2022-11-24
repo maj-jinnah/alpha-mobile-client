@@ -33,14 +33,14 @@ const Blogs = () => {
                     <p>Unit testing is a type of software testing where individual units or software components are tested. Its purpose is to validate that each unit of code performs as expected. A unit can be anything you want it to be a line of code, a method, or a class. <br />
                         To justify any effort in business, there must be a positive impact on the bottom line. Here are a few benefits of writing unit tests: <br />
                         {
-                            <div>
+                            <>
                                 <li>You can test units or functions of your project in isolation.</li>
                                 <li>Unit tests act as documentation for your code.</li>
                                 <li>They enable you to catch bugs early in the development process.</li>
                                 <li>Automated unit tests help a great deal with regression testing.</li>
                                 <li>They detect code smells in your codebase. For example, if you're having a hard time writing unit   tests for  a piece of code, it might be a sign that your function is too complex.</li>
                                 <li>They contribute to higher code quality.</li>
-                            </div>
+                            </>
                         }
                     </p>
                 </div>
