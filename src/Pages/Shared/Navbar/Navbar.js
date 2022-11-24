@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo/logo.png'
+import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Navbar = () => {
+
+    const { user, LogOut } = useContext(AuthContext)
+
+    const HandelLouOut = () => {
+        LogOut()
+            .then(() => { })
+            .catch((error) => { console.error(error) })
+    }
 
     const menuItems =
         <>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/blogs'>Blogs</Link></li>
-            <li><Link to='/login'>LogIn</Link></li>
-            {/* {
+            {
                 user?.uid ?
                     <>
                         <li><Link to='/dashBoard'>DashBoard</Link></li>
                         <li><button onClick={HandelLouOut} >Sign Out</button></li>
                     </> :
                     <li><Link to='/login'>LogIn</Link></li>
-            } */}
+            }
         </>
 
     return (

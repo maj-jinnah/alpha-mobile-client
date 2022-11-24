@@ -1,19 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Signup = () => {
 
     const [error, setError] = useState('')
+    const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const handelSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        const photoURL = form.photoURL.value;
+        // const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
 
         console.log(name, email, password)
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                setError('');
+                // handelUpdateUserProfile(name, photoURL)
+                toast.success('Registered successfully!')
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
+
+        const handelUpdateUserProfile = (name, photoURL) => {
+            const profile = {
+                displayName: name,
+                photoURL: photoURL
+            }
+            updateUserProfile(profile)
+                .then(() => { })
+                .catch((error) => console.error(error))
+        }
+
+
     }
 
     return (
@@ -27,7 +56,7 @@ const Signup = () => {
                         <span className="label-text text-center text-lg">Select your account type</span>
                         <div className='flex items-center justify-evenly'>
                             <div className='flex items-center'>
-                                <input type="radio" name="radio-1" className="radio"  />
+                                <input type="radio" name="radio-1" className="radio" />
                                 <span className="label-text ml-2">Buyer</span></div>
                             <div className='flex items-center'>
 
@@ -44,9 +73,9 @@ const Signup = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Photo URL</span>
+                                <span className="label-text">Chose Your Photo</span>
                             </label>
-                            <input type="text" placeholder="photo url" name='photoURL' className="input input-bordered" required />
+                            <input type="file" className="file-input file-input-bordered w-full max-w-xs" required/>
                         </div>
                         <div className="form-control">
                             <label className="label">

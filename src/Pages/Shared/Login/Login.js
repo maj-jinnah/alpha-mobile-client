@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Login = () => {
 
+    const { googleProviderSignIn, signInUser } = useContext(AuthContext)
     const [error, setError] = useState('')
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const provider = new GoogleAuthProvider()
 
     const handelSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
         console.log(email, password)
+
+        signInUser(email, password)
+            .then((result) => {
+                const user = result.user
+                console.log(user)
+                // navigate(from, { replace: true })
+            })
+            .catch((error) => {
+                console.error(error)
+                setError(error)
+            })
     }
 
     const handelGoogleSignIn = () => {
+        googleProviderSignIn(provider)
+            .then((result) => {
+                const user = result.user
+                console.log(user)
+                // navigate(from, { replace: true })
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     return (
