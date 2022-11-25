@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BrandCard = ({ brand }) => {
 
-    const { name, image } = brand
+    const { name, image, category_id } = brand
 
     return (
         <div>
@@ -11,7 +12,8 @@ const BrandCard = ({ brand }) => {
                 <div className="card-body">
                     <h2 className="card-title">{name}</h2>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                        <Link to={`/brand/${category_id}`}><button className="btn btn-primary">Visit Now</button></Link>
+                        
                     </div>
                 </div>
             </div>
