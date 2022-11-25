@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const location = useLocation()
 
     const provider = new GoogleAuthProvider()
+    const from = location.state?.from?.pathname || "/";
 
     const handelSubmit = (event) => {
         event.preventDefault();
@@ -20,12 +22,14 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+        setError('')
 
         signInUser(email, password)
             .then((result) => {
                 const user = result.user
                 console.log(user)
-                // navigate(from, { replace: true })
+                toast.success('Log in Successful')
+                navigate(from, { replace: true })
             })
             .catch((error) => {
                 console.error(error)
@@ -38,8 +42,9 @@ const Login = () => {
             .then((result) => {
                 const user = result.user
                 console.log(user)
+                toast.success('Log in Successful')
                 setUserRole('buyer')
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
             })
             .catch((error) => {
                 console.error(error)
