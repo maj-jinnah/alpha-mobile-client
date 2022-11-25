@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaGoogle, GoVerified } from 'react-icons/fa';
 
-const PhoneCard = ({ phone }) => {
+const PhoneCard = ({ phone, setPhoneDetail }) => {
 
-    const { name, image, seller, verified, location, date, price, sellingPrice, use } = phone
+    const { name, image, seller, verified, location, date, price, sellingPrice, use, sellerMail } = phone
 
     return (
         <div>
@@ -29,11 +29,12 @@ const PhoneCard = ({ phone }) => {
                                 <p className='mr-3 text-lg'>Original Price: {price} Taka</p>
                                 <p className='mr-3 text-lg'>Selling price: {sellingPrice} Taka</p>
                                 <p className='mr-3 text-lg'>Total using time: {use} years</p>
+                                {/* <p>{sellerMail}</p> */}
                             </div>
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Book Now</button>
+                        <label onClick={() => setPhoneDetail(phone)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
                     </div>
                 </div>
             </div>
