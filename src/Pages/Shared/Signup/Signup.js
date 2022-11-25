@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { setAuthToken } from '../../../api/auth';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Signup = () => {
@@ -35,6 +36,7 @@ const Signup = () => {
                         .then(result => {
                             const user = result.user;
                             console.log(user);
+                            setAuthToken(user)
                             form.reset();
                             setError('');
                             handelUpdateUser(name, photoURL)

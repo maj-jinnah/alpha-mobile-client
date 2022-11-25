@@ -4,6 +4,7 @@ import { FaGoogle } from 'react-icons/fa';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 import toast from 'react-hot-toast';
+import { setAuthToken } from '../../../api/auth';
 
 const Login = () => {
 
@@ -29,6 +30,7 @@ const Login = () => {
                 const user = result.user
                 console.log(user)
                 toast.success('Log in Successful')
+                setAuthToken(user)
                 navigate(from, { replace: true })
             })
             .catch((error) => {
@@ -43,6 +45,7 @@ const Login = () => {
                 const user = result.user
                 console.log(user)
                 toast.success('Log in Successful')
+                setAuthToken(user)
                 setUserRole('buyer')
                 navigate(from, { replace: true })
             })
