@@ -23,6 +23,7 @@ const Modal = ({ phoneDetail, setPhoneDetail }) => {
         const bookingInfo = {
             phoneName,
             phonePrice,
+            phoneImageURL: phoneDetail.image,
             buyerName,
             buyerEmail,
             buyerPhoneNumber,
