@@ -9,7 +9,6 @@ const Login = () => {
 
     const { googleProviderSignIn, signInUser } = useContext(AuthContext)
     const [error, setError] = useState('');
-    const [userRole, setUserRole] = useState('');
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -42,14 +41,35 @@ const Login = () => {
             .then((result) => {
                 const user = result.user
                 console.log(user)
-                toast.success('Log in Successful')
-                setUserRole('Buyer')
-                navigate(from, { replace: true })
+                // setUserRole('Buyer')
+                // toast.success('Log in Successful')
+                // navigate(from, { replace: true })
+                saveUserToDB(user.displayName, user.email)
             })
             .catch((error) => {
                 console.error(error)
             })
     }
+
+    const saveUserToDB = (userName, userEmail) => {
+        const userDB = { userName, userEmail, userRole: 'Buyer' };
+        console.log(userDB);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(userDB)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('Log in Successful')
+                navigate(from, { replace: true })
+            })
+    }
+
+
 
     return (
         <div className="hero bg-base-200">

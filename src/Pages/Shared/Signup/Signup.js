@@ -6,7 +6,6 @@ import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 const Signup = () => {
 
     const [error, setError] = useState('')
-    const [userRole, setUserRole] = useState('');
     const { createUser, updateUser } = useContext(AuthContext);
 
     const navigate = useNavigate()
