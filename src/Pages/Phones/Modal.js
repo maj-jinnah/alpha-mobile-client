@@ -16,39 +16,43 @@ const Modal = ({ phoneDetail, setPhoneDetail }) => {
         const buyerPhoneNumber = form.buyerPhoneNumber.value;
         const buyerMeetingLocation = form.meetingLocation.value;
 
-        console.log(buyerName, buyerEmail, phoneName, phonePrice, buyerMeetingLocation, buyerPhoneNumber)
+        // console.log(buyerName, buyerEmail, phoneName, phonePrice, buyerMeetingLocation, buyerPhoneNumber);
+        
+        // setPhoneDetail(null)
 
-        setPhoneDetail(null)
+        const bookingInfo = {
+            phoneName,
+            phonePrice,
+            buyerName,
+            buyerEmail,
+            buyerPhoneNumber,
+            buyerMeetingLocation,
+            sellerName: phoneDetail.seller,
+            sellerEmail: phoneDetail.sellerMail
+        }
 
-        // const bookingInfo = {
-        //     treatmentName: treatment.name,
-        //     appointmentDate: date,
-        //     patient: name,
-        //     phone,
-        //     email,
-        //     slot
-        // }
+        console.log(bookingInfo)
 
-        // fetch('http://localhost:5000/bookings', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(booking)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data)
-        //         if (data.acknowledged) {
-        //             setPhoneDetail(null)
-        //             toast.success("Successfully Booking Done!")
-        //             // refetch()
-        //         }
-        //         else {
-        //             // setTreatment(null)
-        //             toast.error(data.message)
-        //         }
-        //     })
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    setPhoneDetail(null)
+                    toast.success("Successfully Booking Done!")
+                    // refetch()
+                }
+                else {
+                    // setTreatment(null)
+                    toast.error(data.message)
+                }
+            })
 
     }
 
