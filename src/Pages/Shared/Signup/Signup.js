@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-// import { setAuthToken } from '../../../api/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const Signup = () => {
@@ -9,6 +8,8 @@ const Signup = () => {
     const [error, setError] = useState('')
     const [userRole, setUserRole] = useState('');
     const { createUser, updateUser } = useContext(AuthContext);
+
+    const navigate = useNavigate()
 
     const handelSubmit = (event) => {
         event.preventDefault();
@@ -36,11 +37,10 @@ const Signup = () => {
                         .then(result => {
                             const user = result.user;
                             console.log(user);
-                            // setAuthToken(user)
                             form.reset();
                             setError('');
                             handelUpdateUser(name, photoURL)
-                            toast.success('Registered successfully!')
+                            // toast.success('Registered successfully!')
                         })
                         .catch(error => {
                             console.error(error);
@@ -52,12 +52,32 @@ const Signup = () => {
                             photoURL
                         }
                         updateUser(profile)
-                            .then(() => { })
+                            .then(() => {
+                                saveUserToDB( name, email, role );
+                            })
                             .catch((error) => console.error(error))
                     }
                 }
             })
             .catch(error => console.error(error))
+    }
+
+    const saveUserToDB = (userName, userEmail, userRole) => {
+        const userDB = { userName, userEmail, userRole };
+        console.log(userDB);
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(userDB)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('Registered successfully!')
+                navigate('/');
+            })
     }
 
     return (
