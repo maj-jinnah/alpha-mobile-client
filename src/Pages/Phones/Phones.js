@@ -23,6 +23,7 @@ const Phones = () => {
             <div>
                 {phoneDetail &&
                     <Modal
+                        setPhoneDetail={setPhoneDetail}
                         phoneDetail={phoneDetail}
                     ></Modal>}
             </div>
