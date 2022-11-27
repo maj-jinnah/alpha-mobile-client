@@ -1,13 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const AllSellers = () => {
 
+    const { user } = useContext(AuthContext)
+
     const { data: allSellers = [], refetch } = useQuery({
-        queryKey: ['allsellers'],
+        queryKey: ['allsellers', user.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allsellers`)
+            const res = await fetch(`http://localhost:5000/allsellers?email=${user.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data;
         }
@@ -17,7 +24,7 @@ const AllSellers = () => {
         fetch(`http://localhost:5000/allsellers/verify?email=${email}`, {
             method: 'PUT',
             headers: {
-                authorization : `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => res.json())
@@ -25,6 +32,23 @@ const AllSellers = () => {
                 console.log(data);
                 if (data.modifiedCount > 0) {
                     toast.success("Seller successfully verified!")
+                    refetch();
+                }
+            })
+    }
+
+    const handelDelete = email => {
+        fetch(`http://localhost:5000/users?email=${email}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success("Seller successfully deleted!")
                     refetch();
                 }
             })
@@ -65,7 +89,7 @@ const AllSellers = () => {
                                 </td>
                                 <td>{seller.userEmail}</td>
                                 <td>{seller.verified !== true ? <button onClick={() => handelMakeVerify(seller.userEmail)} className='btn btn-primary btn-sm'>Verify</button> : <button className='btn btn-primary btn-sm ' disabled>Verify</button>}</td>
-                                <td><button className='btn btn-warning btn-sm'>Remove</button></td>
+                                <td><button onClick={() => handelDelete(seller.userEmail)} className='btn btn-warning btn-sm'>Remove</button></td>
                             </tr>)
                         }
                     </tbody>
