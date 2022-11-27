@@ -13,6 +13,7 @@ import Phones from "../../Pages/Phones/Phones";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import Login from "../../Pages/Shared/Login/Login";
 import Signup from "../../Pages/Shared/Signup/Signup";
+import AdminRoute from "../PrivetRouter/AdminRoute";
 import PrivetRoute from "../PrivetRouter/PrivetRouter";
 
 export const router = createBrowserRouter([
@@ -62,15 +63,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/reporteditems',
-                element: <ReportedItems></ReportedItems>
+                element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
             }
         ]
     },
