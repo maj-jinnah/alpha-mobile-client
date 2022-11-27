@@ -1,26 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
 
     const { googleProviderSignIn, signInUser } = useContext(AuthContext)
     const [error, setError] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+    
+    const provider = new GoogleAuthProvider()
+
     const navigate = useNavigate()
     const location = useLocation()
-
-    const provider = new GoogleAuthProvider()
     const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true })
+        }
+    }, [token, from, navigate])
 
     const handelSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        // console.log(email, password)
         setError('')
 
         signInUser(email, password)
@@ -28,7 +38,8 @@ const Login = () => {
                 const user = result.user
                 console.log(user)
                 toast.success('Log in Successful')
-                navigate(from, { replace: true })
+                setLoginUserEmail(user.email)
+                // navigate(from, { replace: true })
             })
             .catch((error) => {
                 console.error(error)
@@ -65,7 +76,8 @@ const Login = () => {
             .then(data => {
                 console.log(data)
                 toast.success('Log in Successful')
-                navigate(from, { replace: true })
+                setLoginUserEmail(userEmail)
+                // navigate(from, { replace: true })
             })
     }
 
