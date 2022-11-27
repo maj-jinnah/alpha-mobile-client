@@ -12,7 +12,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
-    
+
     const provider = new GoogleAuthProvider()
 
     const navigate = useNavigate()
@@ -55,15 +55,15 @@ const Login = () => {
                 // setUserRole('Buyer')
                 // toast.success('Log in Successful')
                 // navigate(from, { replace: true })
-                saveUserToDB(user.displayName, user.email)
+                saveUserToDB(user.displayName, user.email, user.photoURL)
             })
             .catch((error) => {
                 console.error(error)
             })
     }
 
-    const saveUserToDB = (userName, userEmail) => {
-        const userDB = { userName, userEmail, userRole: 'Buyer' };
+    const saveUserToDB = (userName, userEmail, photoURL) => {
+        const userDB = { userName, userEmail, photoURL, userRole: 'Buyer' };
         console.log(userDB);
         fetch('http://localhost:5000/users', {
             method: 'POST',

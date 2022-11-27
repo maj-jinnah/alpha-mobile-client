@@ -63,7 +63,7 @@ const Signup = () => {
                         }
                         updateUser(profile)
                             .then(() => {
-                                saveUserToDB(name, email, role);
+                                saveUserToDB(name, email, photoURL, role);
                             })
                             .catch((error) => console.error(error))
                     }
@@ -72,8 +72,8 @@ const Signup = () => {
             .catch(error => console.error(error))
     }
 
-    const saveUserToDB = (userName, userEmail, userRole) => {
-        const userDB = { userName, userEmail, userRole };
+    const saveUserToDB = (userName, userEmail, photoURL, userRole) => {
+        const userDB = { userName, userEmail, photoURL, userRole };
         console.log(userDB);
         fetch('http://localhost:5000/users', {
             method: 'POST',
