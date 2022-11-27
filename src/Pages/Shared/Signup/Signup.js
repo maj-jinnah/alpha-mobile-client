@@ -1,14 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
+import useToken from '../../../hooks/useToken';
 
 const Signup = () => {
 
     const [error, setError] = useState('')
     const { createUser, updateUser } = useContext(AuthContext);
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
 
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true })
+        }
+    }, [token, from, navigate])
 
     const handelSubmit = (event) => {
         event.preventDefault();
@@ -52,7 +63,7 @@ const Signup = () => {
                         }
                         updateUser(profile)
                             .then(() => {
-                                saveUserToDB( name, email, role );
+                                saveUserToDB(name, email, role);
                             })
                             .catch((error) => console.error(error))
                     }
@@ -73,11 +84,25 @@ const Signup = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                toast.success('Registered successfully!')
-                navigate('/');
+                if (data.acknowledged) {
+                    console.log(data)
+                    toast.success('Registered successfully!')
+                    setCreatedUserEmail(userEmail)
+                    // getUserToken(userEmail)
+                }
             })
     }
+
+    // const getUserToken = email => {
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     .then(res => res.json())
+    //     .then(data=>{
+    //         if(data.accessToken){
+    //             localStorage.setItem('accessToken', data.accessToken);
+    //             navigate('/');
+    //         }
+    //     })
+    // }
 
     return (
         <div className="hero  bg-base-200">
