@@ -22,8 +22,10 @@ const DashBoardLayout = () => {
                     <ul className="menu p-4 w-80 bg-base-100 text-base-content">
                         <small>Click the option below</small>
                         <li><Link to='/dashboard/myorders'>My Orders</Link></li>
+
                         <li><Link to='/dashboard/addaproduct'> Add A product</Link></li>
                         <li><Link to='/dashboard/myproduct'>My Products</Link></li>
+                        
                         {
                             isAdmin && <>
                                 <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
