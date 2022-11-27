@@ -29,7 +29,7 @@ const PhoneCard = ({ phone, setPhoneDetail }) => {
                                 <p className='mr-3 text-lg'>Original Price: {price} Taka</p>
                                 <p className='mr-3 text-lg'>Selling price: {sellingPrice} Taka</p>
                                 <p className='mr-3 text-lg'>Total using time: {use} years</p>
-                                {/* <p>{sellerMail}</p> */}
+                                <p>{sellerMail}</p>
                             </div>
                         </div>
                     </div>
