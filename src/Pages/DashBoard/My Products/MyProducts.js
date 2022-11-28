@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import Loader from '../../../components/Loader/Loader';
 import { AuthContext } from '../../../Contexts/AuthContext/AuthProvider';
 
 const MyProducts = () => {
 
+    const [isAdvertise, setIsAdvertise] = useState('')
     const { user } = useContext(AuthContext)
+
 
     const { data: myPhones = [], refetch } = useQuery({
         queryKey: ['myproduct', user?.email],
@@ -56,6 +58,7 @@ const MyProducts = () => {
                 console.log(data)
                 if (data.acknowledged) {
                     toast.success("Successfully advertise done")
+                    setIsAdvertise(true)
                 }
                 else {
                     toast.error(data.message)
@@ -87,13 +90,18 @@ const MyProducts = () => {
                                                 </> :
                                                     <>
                                                         <div className="badge badge-secondary">Available</div>
-                                                        <button onClick={() => handelAdvertise(phone)}
-                                                            className="btn btn-primary btn-sm ml-2">Advertise</button>
+                                                        {isAdvertise === true ?
+                                                            <button onClick={() => handelAdvertise(phone)} disabled
+                                                                className="btn btn-primary btn-sm ml-2">Advertise</button>
+                                                            :
+                                                            <button onClick={() => handelAdvertise(phone)}
+                                                                className="btn btn-primary btn-sm ml-2">Advertise</button>
+                                                        }
                                                     </>
                                             }
                                         </div>
                                     </div>
-                                    <p>{phone._id}</p>
+                                    {/* <p>{phone._id}</p> */}
                                 </div>
                             </div>
                         </div>)
