@@ -25,12 +25,12 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/brand'),
+                loader: () => fetch('https://alpha-mobile-server-flax.vercel.app/brand'),
                 element: <Home></Home>
             },
             {
                 path: '/brand/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/brand/${params.id}`),
+                loader: ({ params }) => fetch(`https://alpha-mobile-server-flax.vercel.app/brand/${params.id}`),
                 element: <PrivetRoute><Phones></Phones></PrivetRoute>
             },
             {

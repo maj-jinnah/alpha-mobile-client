@@ -55,10 +55,10 @@ const AddAProduct = () => {
                     condition,
                     category_id,
                     image: photoURL,
-                    status : false
+                    status: false
                 }
 
-                fetch(`http://localhost:5000/products?email=${user.email}`, {
+                fetch(`https://alpha-mobile-server-flax.vercel.app/products?email=${user.email}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

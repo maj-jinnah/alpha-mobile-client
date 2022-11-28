@@ -75,7 +75,7 @@ const Signup = () => {
     const saveUserToDB = (userName, userEmail, photoURL, userRole) => {
         const userDB = { userName, userEmail, photoURL, userRole };
         console.log(userDB);
-        fetch('http://localhost:5000/users', {
+        fetch('https://alpha-mobile-server-flax.vercel.app/users', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"
@@ -94,7 +94,7 @@ const Signup = () => {
     }
 
     // const getUserToken = email => {
-    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     fetch(`https://alpha-mobile-server-flax.vercel.app/jwt?email=${email}`)
     //     .then(res => res.json())
     //     .then(data=>{
     //         if(data.accessToken){

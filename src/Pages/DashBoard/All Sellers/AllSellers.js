@@ -10,7 +10,7 @@ const AllSellers = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['allsellers', user.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allsellers?email=${user.email}`, {
+            const res = await fetch(`https://alpha-mobile-server-flax.vercel.app/allsellers?email=${user.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const AllSellers = () => {
     })
 
     const handelMakeVerify = (email) => {
-        fetch(`http://localhost:5000/allsellers/verify?email=${email}`, {
+        fetch(`https://alpha-mobile-server-flax.vercel.app/allsellers/verify?email=${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const AllSellers = () => {
     }
 
     const handelDelete = email => {
-        fetch(`http://localhost:5000/users?email=${email}`, {
+        fetch(`https://alpha-mobile-server-flax.vercel.app/users?email=${email}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

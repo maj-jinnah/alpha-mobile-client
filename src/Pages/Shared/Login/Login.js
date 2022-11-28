@@ -65,7 +65,7 @@ const Login = () => {
     const saveUserToDB = (userName, userEmail, photoURL) => {
         const userDB = { userName, userEmail, photoURL, userRole: 'Buyer' };
         console.log(userDB);
-        fetch('http://localhost:5000/users', {
+        fetch('https://alpha-mobile-server-flax.vercel.app/users', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

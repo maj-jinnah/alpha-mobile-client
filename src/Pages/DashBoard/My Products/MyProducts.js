@@ -13,7 +13,7 @@ const MyProducts = () => {
     const { data: myPhones = [], refetch } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproduct?email=${user?.email}`, {
+            const res = await fetch(`https://alpha-mobile-server-flax.vercel.app/myproduct?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -24,7 +24,7 @@ const MyProducts = () => {
     })
 
     const handelDelete = id => {
-        fetch(`http://localhost:5000/myproduct/${id}?email=${user.email}`, {
+        fetch(`https://alpha-mobile-server-flax.vercel.app/myproduct/${id}?email=${user.email}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -45,7 +45,7 @@ const MyProducts = () => {
 
         const phoneInfo = { name, price, sellingPrice, location, seller, sellerMail, use, date, purchaseDate, description, sellerPhoneNumber, condition, category_id, image, status }
 
-        fetch(`http://localhost:5000/advertise?email=${user.email}`, {
+        fetch(`https://alpha-mobile-server-flax.vercel.app/advertise?email=${user.email}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -6,7 +6,7 @@ const AdvertisedItems = () => {
     const { data: myadvertises = [], refetch } = useQuery({
         queryKey: ['myadvertise'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myadvertise`, {
+            const res = await fetch(`https://alpha-mobile-server-flax.vercel.app/myadvertise`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -29,9 +29,9 @@ const AdvertisedItems = () => {
                             </h2>
                             <p>{adv.description}</p>
                             <div className="card-actions justify-end">
-                                
+
                                 <div className="badge badge-secondary">{adv.sellingPrice} Taka Only</div>
-                                
+
                             </div>
                         </div>
                     </div>

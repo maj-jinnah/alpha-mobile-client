@@ -17,7 +17,7 @@ const Modal = ({ phoneDetail, setPhoneDetail }) => {
         const buyerMeetingLocation = form.meetingLocation.value;
 
         // console.log(buyerName, buyerEmail, phoneName, phonePrice, buyerMeetingLocation, buyerPhoneNumber);
-        
+
         // setPhoneDetail(null)
 
         const bookingInfo = {
@@ -34,7 +34,7 @@ const Modal = ({ phoneDetail, setPhoneDetail }) => {
 
         // console.log(bookingInfo)
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://alpha-mobile-server-flax.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

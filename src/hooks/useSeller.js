@@ -6,7 +6,7 @@ const useSeller = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/seller/${email}`)
+            fetch(`https://alpha-mobile-server-flax.vercel.app/users/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -15,7 +15,7 @@ const useSeller = email => {
                 })
         }
     }, [email]);
-    return [isSeller,isSellerLoading];
+    return [isSeller, isSellerLoading];
 }
 
 export default useSeller;
