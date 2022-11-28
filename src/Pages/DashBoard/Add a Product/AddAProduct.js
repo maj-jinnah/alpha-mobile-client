@@ -78,13 +78,7 @@ const AddAProduct = () => {
                         }
                     })
             })
-
-
     }
-
-
-
-
 
     return (
         <div className='mt-2 mb-10'>
