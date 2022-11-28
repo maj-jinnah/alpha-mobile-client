@@ -13,6 +13,6 @@ Alpha mobile is a second-hand phone sales website. Where any user could buy a sm
  * Any seller or any buyer could sell or buy phone. And er have stripe payment gateway system. So you don't need to worry about payment.
  * We have a blog page to help you learn more.
 
-
+## Admin credential 
 * adminEmail: ph@ph.com
 * adminPassword: 123456
