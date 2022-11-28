@@ -38,6 +38,32 @@ const MyProducts = () => {
             })
     }
 
+    const handelAdvertise = phone => {
+        const { name, price, sellingPrice, location, seller, sellerMail, use, date, purchaseDate, description, sellerPhoneNumber, condition, category_id, image, status } = phone
+
+        const phoneInfo = { name, price, sellingPrice, location, seller, sellerMail, use, date, purchaseDate, description, sellerPhoneNumber, condition, category_id, image, status }
+
+        fetch(`http://localhost:5000/advertise?email=${user.email}`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(phoneInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success("Successfully advertise done")
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+
+    }
+
 
     return (
         <div className='mt-2 mb-10'>
@@ -60,9 +86,9 @@ const MyProducts = () => {
                                                     <button className="btn btn-primary " disabled>sold</button>
                                                 </> :
                                                     <>
-                                                        {/* <button className="btn btn-primary btn-sm">Available </button> */}
                                                         <div className="badge badge-secondary">Available</div>
-                                                        <button className="btn btn-primary btn-sm ml-2">Advertise</button>
+                                                        <button onClick={() => handelAdvertise(phone)}
+                                                            className="btn btn-primary btn-sm ml-2">Advertise</button>
                                                     </>
                                             }
                                         </div>
