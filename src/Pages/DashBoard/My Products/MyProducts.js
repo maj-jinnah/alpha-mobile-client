@@ -22,22 +22,20 @@ const MyProducts = () => {
     })
 
     const handelDelete = id => {
-        const url = `http://localhost:5000/myproduct/${id}?email=${user.email}`
-        console.log(url);
-        // fetch(`http://localhost:5000/myproduct/${id}?email=${user.email}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         authorization: `bearer ${localStorage.getItem('accessToken')}`
-        //     }
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.deletedCount > 0) {
-        //             toast.success("Seller successfully deleted!")
-        //             refetch();
-        //         }
-        //     })
+        fetch(`http://localhost:5000/myproduct/${id}?email=${user.email}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success("Product successfully deleted!")
+                    refetch();
+                }
+            })
     }
 
 
