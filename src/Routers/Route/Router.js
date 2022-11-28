@@ -14,7 +14,9 @@ import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import Login from "../../Pages/Shared/Login/Login";
 import Signup from "../../Pages/Shared/Signup/Signup";
 import AdminRoute from "../PrivetRouter/AdminRoute";
+import BuyerRoute from "../PrivetRouter/BuyerRoute";
 import PrivetRoute from "../PrivetRouter/PrivetRouter";
+import SellerRoute from "../PrivetRouter/SellerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -51,15 +53,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/myorders',
-                element: <MyOrders></MyOrders>
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
                 path: '/dashboard/addaproduct',
-                element: <AddAProduct></AddAProduct>
+                element: <SellerRoute><AddAProduct></AddAProduct></SellerRoute>
             },
             {
                 path: '/dashboard/myproduct',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/allbuyers',
